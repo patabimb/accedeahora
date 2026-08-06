@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<script src="https://buffcasualwhine.com/55/dd/f6/55ddf692f37c344ed51b1683fba41381.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ver Películas y Series Gratis</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0a0a0c;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            /* Memberikan ruang atas yang pas agar Slot 1 dan Slot 2 tidak saling bertumpuk/terlalu rapat */
+            padding-top: calc(95px + env(safe-area-inset-top, 0px));
+            padding-bottom: calc(65px + env(safe-area-inset-bottom, 0px));
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.15), transparent 70%),
+                radial-gradient(circle at 50% 100%, rgba(0, 210, 255, 0.1), transparent 70%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Container Responsif untuk Semua Device */
+        .wrapper {
+            width: 100%;
+            max-width: 520px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Profile Header Area */
+        .profile-header {
+            text-align: center;
+            margin: 10px 0 15px 0;
+            width: 100%;
+        }
+
+        /* Logo Streaming Modern */
+        .avatar-box {
+            position: relative;
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 12px auto;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, #e50914, #ff5f6d, #00d2ff);
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px rgba(229, 9, 20, 0.4); }
+            100% { box-shadow: 0 0 25px rgba(0, 210, 255, 0.7); }
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #1a1a24 0%, #0d0d12 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #0a0a0c;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .logo-icon {
+            font-size: 20px;
+            color: #e50914;
+            margin-bottom: -2px;
+            filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.6));
+        }
+
+        .logo-text-top {
+            font-weight: 900;
+            font-size: 15px;
+            letter-spacing: 1px;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .logo-text-bottom {
+            font-weight: 800;
+            font-size: 10px;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #ff5f6d, #e50914);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge-verified {
+            display: inline-block;
+            background: rgba(229, 9, 20, 0.2);
+            border: 1px solid #e50914;
+            color: #ff4b5c;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .profile-title {
+            font-size: clamp(16px, 4.5vw, 22px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #cccccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+
+        .profile-sub {
+            font-size: clamp(12px, 3.5vw, 14px);
+            color: #a0a0a0;
+            margin-top: 6px;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+
+        /* High CTR Link Buttons */
+        .btn-link {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(25, 25, 30, 0.9), rgba(15, 15, 18, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 16px 20px;
+            margin: 8px 0;
+            border-radius: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(13px, 3.8vw, 15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+        }
+
+        .btn-link:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e50914, #b20710);
+            border: none;
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.4);
+        }
+
+        .btn-icon {
+            font-size: 18px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .btn-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .arrow-icon {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        /* AD SPACES */
+        .ad-container {
+            width: 100%;
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(18, 18, 22, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 6px;
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .ad-label {
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            font-size: 8px;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        /* Fixed Sticky Top Banner (Diposisikan pas menempel di batas atas layar) */
+        .sticky-top-ad {
+            position: fixed;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 728px;
+            height: auto;
+            min-height: 45px;
+            z-index: 9999;
+            background: rgba(10, 10, 15, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+            padding: 4px;
+            overflow: hidden;
+        }
+
+        .sticky-bottom-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 9999;
+            background: #000000;
+            border-top: 1px solid rgba(0, 210, 255, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.8);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            overflow: hidden;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #555566;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLOT 1: STICKY TOP BANNER (Key: 453e0996357cdadd43b9a289a5273ae9 - 728x90) -->
+    <div class="sticky-top-ad">
+        <center>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '453e0996357cdadd43b9a289a5273ae9',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//twigentirelysailor.com/453e0996357cdadd43b9a289a5273ae9/invoke.js"></script>
+        </center>
+    </div>
+
+    <div class="wrapper">
+
+        <!-- SLOT 2: PRE-BIO TOP BANNER (Key: 9cbca9fc3fab1a4816a56e2fcd9cedb9 - 320x50) -->
+        <div class="ad-container">
+            <span class="ad-label">¡Accede ahora!</span>
+            <center>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '9cbca9fc3fab1a4816a56e2fcd9cedb9',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//twigentirelysailor.com/9cbca9fc3fab1a4816a56e2fcd9cedb9/invoke.js"></script>
+            </center>
+        </div>
+
+        <!-- PROFILE / BRAND SECTION -->
+        <div class="profile-header">
+            <div class="avatar-box">
+                <div class="avatar-img">
+                    <div class="logo-icon">⏯️</div>
+                    <div class="logo-text-top">Master24HD</div>
+                </div>
+            </div>
+            <div class="badge-verified">¡Accede ahora!</div>
+            <h1 class="profile-title">Ver Películas y Series Gratis</h1>
+            <p class="profile-sub">Mira películas y series gratis en línea en HD en cualquier dispositivo. Master24HD ofrece películas en streaming de diversos géneros como Acción, Terror, Ciencia Ficción, Crimen y Comedia. Fácilmente accesible en todos los dispositivos, incluidos teléfonos inteligentes, tabletas, portátiles y ordenadores de sobremesa. Ver ahora.</p>
+        </div>
+
+        <!-- SLOT 3: MID-BIO BRIDGE BANNER (Key: 9cbca9fc3fab1a4816a56e2fcd9cedb9 - 320x50) -->
+        <div class="ad-container">
+            <span class="ad-label">¡Accede ahora!</span>
+            <center>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '9cbca9fc3fab1a4816a56e2fcd9cedb9',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//twigentirelysailor.com/9cbca9fc3fab1a4816a56e2fcd9cedb9/invoke.js"></script>
+            </center>
+        </div>
+
+        <!-- TOMBOL 1 -->
+        <a href="javascript:void(0)" class="btn-link btn-primary" onclick="startTimer(this, 'https://master24hd.site/es')">
+            <div class="btn-content">
+                <span class="btn-icon">⏯️</span>
+                <span class="btn-text">¡Accede ahora!</span>
+                <span class="arrow-icon">✅</span>
+            </div>
+        </a>
+
+        <!-- SLOT 6: EXIT INTENT BOTTOM BANNER (Key: b1459668f954a85fab060a214b597df2 - 160x300) -->
+        <div class="ad-container">
+            <span class="ad-label">¡Accede ahora!</span>
+            <center>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'b1459668f954a85fab060a214b597df2',
+                    'format' : 'iframe',
+                    'height' : 300,
+                    'width' : 160,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//twigentirelysailor.com/b1459668f954a85fab060a214b597df2/invoke.js"></script>
+            </center>
+        </div>
+
+        <footer>
+            &copy; 2026 MASTER24HD
+            
+            <!-- Histats Tracking Code -->
+            <script type="text/javascript">
+                var _Hasync= _Hasync|| [];
+                _Hasync.push(['Histats.start', '1,5011181,4,0,0,0,00010000']);
+                _Hasync.push(['Histats.fasi', '1']);
+                _Hasync.push(['Histats.track_hits', '']);
+                (function() {
+                    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+                    hs.src = ('//s10.histats.com/js15_as.js');
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+                })();
+            </script>
+            <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5011181&101" alt="" border="0"></a></noscript>
+        </footer>
+
+    </div>
+
+    <!-- SLOT 7: STICKY BOTTOM BANNER (Key: e12c3573cb4e0def1b3a1938aa8f0654 - 468x60) -->
+    <div class="sticky-bottom-ad">
+        <center>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'e12c3573cb4e0def1b3a1938aa8f0654',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//twigentirelysailor.com/e12c3573cb4e0def1b3a1938aa8f0654/invoke.js"></script>
+        </center>
+    </div>
+
+    <!-- SCRIPT AUTO-REDIRECT DIRECT -->
+    <script>
+    function startTimer(element, targetUrl) {
+        if (element.getAttribute('data-running') === 'true') {
+            return;
+        }
+
+        element.setAttribute('data-running', 'true');
+        let textSpan = element.querySelector('.btn-text');
+        
+        if (!element.getAttribute('data-original-text')) {
+            element.setAttribute('data-original-text', textSpan.innerText);
+        }
+
+        let timeLeft = 7;
+        element.style.background = 'linear-gradient(135deg, #d35400, #e67e22)';
+        element.style.boxShadow = '0 4px 15px rgba(211, 84, 0, 0.5)';
+        textSpan.innerText = 'Preparando el servidor... (' + timeLeft + ' วิ)';
+
+        let countdown = setInterval(function() {
+            timeLeft--;
+            textSpan.innerText = 'Preparando el servidor... (' + timeLeft + ' วิ)';
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                textSpan.innerText = 'Ver Películas y Series Gratis...';
+                element.style.background = 'linear-gradient(135deg, #00c853, #009624)';
+                
+                window.location.href = targetUrl;
+            }
+        }, 1000);
+    }
+
+    window.addEventListener('pageshow', function(event) {
+        let buttons = document.querySelectorAll('.btn-link');
+        buttons.forEach(function(btn) {
+            btn.removeAttribute('data-running');
+            let textSpan = btn.querySelector('.btn-text');
+            let originalText = btn.getAttribute('data-original-text');
+            
+            if (originalText) {
+                textSpan.innerText = originalText;
+            }
+
+            if (btn.classList.contains('btn-primary')) {
+                btn.style.background = 'linear-gradient(135deg, #e50914, #b20710)';
+                btn.style.boxShadow = '0 4px 20px rgba(229, 9, 20, 0.4)';
+            } else {
+                btn.style.background = 'linear-gradient(135deg, rgba(25, 25, 30, 0.9), rgba(15, 15, 18, 0.9))';
+                btn.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>
