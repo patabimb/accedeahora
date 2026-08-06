@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>กำลังโหลดวิดีโอ - จำเป็นต้องยืนยันตัวตน</title>
+<title>Cargando video - Se requiere verificación de identidad</title>
 <style>
 html, body {    
     margin: 0;    
@@ -296,20 +296,20 @@ h2 {
 
         </div>
         
-        <div class="movie-icon">🎬</div>
+        <div class="movie-icon">⏯️</div>
         
-        <h2>ยืนยันตัวตนเพื่อรับชมวิดีโอ</h2>
+        <h2>Cargando video - Se requiere verificación de identidad</h2>
         <p class="subtext" id="statusText">
-            กรุณายืนยันว่าคุณไม่ใช่โปรแกรมอัตโนมัติ เพื่อปลดล็อกเซิร์ฟเวอร์สตรีมมิ่งและรับชมภาพยนตร์หรือซีรีส์ต่อ
+            Por favor, confirma que no eres un robot para desbloquear el servidor de streaming y continuar viendo la película o serie
         </p>
         
         <div class="countdown-container" id="countdownContainer">
-            กำลังเชื่อมต่อเซิร์ฟเวอร์... วิดีโอจะพร้อมใช้งานในอีก <span id="timer">15</span> วินาที
+            Cargando el servidor... El video estará disponible en <span id="timer">10</span> segundos
         </div>
         
         <div class="captcha-box" id="captchaBox">
             <div class="checkbox" id="checkbox"></div>
-            <span id="questionText">ฉันไม่ใช่หุ่นยนต์ (เล่นวิดีโอ)</span>
+            <span id="questionText">No soy un robot (reproducir video)</span>
         </div>
 
         <div class="ad-placeholder ad-300x250">
@@ -327,7 +327,7 @@ h2 {
         </div>
         
         <div class="footer-text">
-            ระบบสตรีมมิ่งเข้ารหัสปลอดภัย • รองรับความละเอียด Full HD • เซิร์ฟเวอร์ความเร็วสูง
+            Sistema de streaming con cifrado seguro • Compatible con resolución Full HD • Servidor de alta velocidadz
         </div>
     </div>
 
@@ -375,7 +375,7 @@ document.getElementById('captchaBox').addEventListener('click', function() {
     captchaBox.style.pointerEvents = 'none';
     captchaBox.style.opacity = '0.6';
     
-    statusText.innerText = "ยืนยันตัวตนสำเร็จ! กำลังเตรียมเครื่องเล่นวิดีโอของคุณ...";
+    statusText.innerText = "¡Verificación de identidad exitosa! Preparando tu reproductor de video...";
     
     countdownContainer.style.display = 'block';
     
