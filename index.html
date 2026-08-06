@@ -2,471 +2,410 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<script src="https://buffcasualwhine.com/55/dd/f6/55ddf692f37c344ed51b1683fba41381.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ver Películas y Series Gratis</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>กำลังโหลดวิดีโอ - จำเป็นต้องยืนยันตัวตน</title>
+<style>
+html, body {    
+    margin: 0;    
+    padding: 0;    
+    width: 100%;    
+    min-height: 100vh;    
+    padding-top: 110px;
+    padding-bottom: 80px;
+    font-family: "Noto Sans Thai", "Tahoma", "Segoe UI", Roboto, sans-serif;
+    /* Dark Cinematic Theme */
+    background: linear-gradient(135deg, #0f0f14, #1a1a26);
+    display: flex;    
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
 
-        body {
-            background-color: #0a0a0c;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            /* Memberikan ruang atas yang pas agar Slot 1 dan Slot 2 tidak saling bertumpuk/terlalu rapat */
-            padding-top: calc(95px + env(safe-area-inset-top, 0px));
-            padding-bottom: calc(65px + env(safe-area-inset-bottom, 0px));
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.15), transparent 70%),
-                radial-gradient(circle at 50% 100%, rgba(0, 210, 255, 0.1), transparent 70%);
-            background-attachment: fixed;
-            overflow-x: hidden;
-            width: 100%;
-        }
+/* --- AD MANAGER STYLES --- */
+.ad-placeholder {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c6c8c;
+    font-size: 12px;
+}
 
-        /* Container Responsif untuk Semua Device */
-        .wrapper {
-            width: 100%;
-            max-width: 520px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+/* Top Banner 728x90 (Responsive Scale for Mobile) */
+.ad-top-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0f14;
+    z-index: 9999;
+    padding: 5px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,.5);
+}
+.ad-728x90 {
+    width: 728px;
+    height: 90px;
+    flex-shrink: 0;
+}
 
-        /* Profile Header Area */
-        .profile-header {
-            text-align: center;
-            margin: 10px 0 15px 0;
-            width: 100%;
-        }
+/* Main Layout Wrapper for Skyscrapers */
+.main-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
 
-        /* Logo Streaming Modern */
-        .avatar-box {
-            position: relative;
-            width: 95px;
-            height: 95px;
-            margin: 0 auto 12px auto;
-            border-radius: 50%;
-            padding: 3px;
-            background: linear-gradient(45deg, #e50914, #ff5f6d, #00d2ff);
-            box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
-            animation: pulse-glow 3s infinite alternate;
-        }
+/* Skyscrapers (Desktop Only) */
+.ad-left-160x600, .ad-right-160x300 {
+    display: none;
+    width: 160px;
+    flex-shrink: 0;
+}
+.ad-left-160x600 { height: 600px; }
+.ad-right-160x300 { height: 300px; }
 
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 15px rgba(229, 9, 20, 0.4); }
-            100% { box-shadow: 0 0 25px rgba(0, 210, 255, 0.7); }
-        }
+/* Inside Card Banner 300x250 */
+.ad-300x250 {
+    width: 300px;
+    height: 250px;
+    margin: 20px auto 0 auto;
+    border-radius: 8px;
+}
 
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle, #1a1a24 0%, #0d0d12 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #0a0a0c;
-            padding: 5px;
-            text-align: center;
-        }
+/* Below Card Banner 468x60 */
+.ad-468x60 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0f14;
+    margin: 0;
+    z-index: 9999;
+    box-shadow: 0 -2px 10px rgba(0,0,0,.5);
+}
 
-        .logo-icon {
-            font-size: 20px;
-            color: #e50914;
-            margin-bottom: -2px;
-            filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.6));
-        }
+/* --- ORIGINAL CARD STYLES --- */
+.security-card {
+    width: 90%;    
+    max-width: 460px;
+    background: #1c1c27; 
+    border-radius: 24px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    border: 1px solid #2c2c3e;
+    box-sizing: border-box;
+}
+.movie-icon {
+    width: 70px;    
+    height: 70px;
+    margin: auto auto 20px;
+    display: flex;    
+    align-items: center;    
+    justify-content: center;
+    font-size: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e50914, #9b040c);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
+}
+h2 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+.subtext {
+    margin: 0 0 28px;
+    color: #b3b3b3;
+    font-size: 15px;
+    line-height: 1.7;
+}
+.captcha-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid #3c3c52;
+    border-radius: 14px;
+    background: #252536;
+    cursor: pointer;
+    transition: .25s;
+}
+.captcha-box:hover {
+    border-color: #e50914;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.2);
+}
+.checkbox {
+    width: 24px;    
+    height: 24px;
+    border: 2px solid #5c5c78;
+    border-radius: 6px;
+    background: #1c1c27;
+    position: relative;
+}
+.checkbox.checked {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+.checkbox.checked:after {
+    content: "";
+    position: absolute;
+    width: 6px;    
+    height: 12px;
+    border-right: 3px solid #fff;    
+    border-bottom: 3px solid #fff;
+    transform: rotate(45deg);
+    left: 7px;    
+    top: 2px;
+}
+#questionText {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+.footer-text {
+    margin-top: 24px;
+    font-size: 13px;
+    color: #6c6c8c;
+    line-height: 1.6;
+}
+.countdown-container {
+    display: none;
+    margin-bottom: 20px; /* Diubah menjadi margin-bottom agar memberi jarak dengan captcha */
+    font-size: 16px;
+    color: #ffffff;
+    background: rgba(229, 9, 20, 0.1);
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(229, 9, 20, 0.3);
+}
+#timer {
+    font-weight: bold;
+    color: #e50914;
+    font-size: 18px;
+}
 
-        .logo-text-top {
-            font-weight: 900;
-            font-size: 15px;
-            letter-spacing: 1px;
-            color: #ffffff;
-            line-height: 1.1;
-        }
+/* Responsive Media Queries */
+@media(min-width: 1024px) {
+    .ad-left-160x600, .ad-right-160x300 {
+        display: flex;
+    }
+}
 
-        .logo-text-bottom {
-            font-weight: 800;
-            font-size: 10px;
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #ff5f6d, #e50914);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+@media(max-width: 768px) {
+    body {
+        padding-bottom: 70px; 
+    }
+    .ad-top-container {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .ad-728x90 {
+        transform: scale(0.55);
+        transform-origin: top center;
+        margin: -20px 0; 
+    }
+    .security-card {
+        padding: 32px 22px;    
+    }
+    h2 {
+        font-size: 20px;    
+    }
+    .subtext {
+        font-size: 14px;    
+    }
+    .ad-468x60 {
+        display: none; 
+    }
+}
 
-        .badge-verified {
-            display: inline-block;
-            background: rgba(229, 9, 20, 0.2);
-            border: 1px solid #e50914;
-            color: #ff4b5c;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 20px;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-
-        .profile-title {
-            font-size: clamp(16px, 4.5vw, 22px);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            background: linear-gradient(to right, #ffffff, #cccccc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.3;
-        }
-
-        .profile-sub {
-            font-size: clamp(12px, 3.5vw, 14px);
-            color: #a0a0a0;
-            margin-top: 6px;
-            line-height: 1.4;
-            padding: 0 10px;
-        }
-
-        /* High CTR Link Buttons */
-        .btn-link {
-            width: 100%;
-            background: linear-gradient(135deg, rgba(25, 25, 30, 0.9), rgba(15, 15, 18, 0.9));
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 16px 20px;
-            margin: 8px 0;
-            border-radius: 12px;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: clamp(13px, 3.8vw, 15px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            user-select: none;
-            text-align: center;
-        }
-
-        .btn-link:active {
-            transform: scale(0.98);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #e50914, #b20710);
-            border: none;
-            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.4);
-        }
-
-        .btn-icon {
-            font-size: 18px;
-            margin-right: 10px;
-            flex-shrink: 0;
-        }
-
-        .btn-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .btn-text {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .arrow-icon {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-left: 8px;
-            flex-shrink: 0;
-        }
-
-        /* AD SPACES */
-        .ad-container {
-            width: 100%;
-            margin: 10px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(18, 18, 22, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 6px;
-            position: relative;
-            overflow: hidden;
-            max-width: 100%;
-        }
-
-        .ad-label {
-            position: absolute;
-            top: 2px;
-            right: 6px;
-            font-size: 8px;
-            color: rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 2;
-        }
-
-        /* Fixed Sticky Top Banner (Diposisikan pas menempel di batas atas layar) */
-        .sticky-top-ad {
-            position: fixed;
-            top: 4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 95%;
-            max-width: 728px;
-            height: auto;
-            min-height: 45px;
-            z-index: 9999;
-            background: rgba(10, 10, 15, 0.92);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(229, 9, 20, 0.3);
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-            padding: 4px;
-            overflow: hidden;
-        }
-
-        .sticky-bottom-ad {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            z-index: 9999;
-            background: #000000;
-            border-top: 1px solid rgba(0, 210, 255, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.8);
-            padding-bottom: env(safe-area-inset-bottom, 0px);
-            overflow: hidden;
-        }
-
-        footer {
-            margin-top: 20px;
-            font-size: 11px;
-            color: #555566;
-            text-align: center;
-        }
-    </style>
+@media(max-width: 420px) {
+    .ad-728x90 {
+        transform: scale(0.42);
+        margin: -25px 0;
+    }
+}
+</style>
 </head>
 <body>
 
-    <!-- SLOT 1: STICKY TOP BANNER (Key: 453e0996357cdadd43b9a289a5273ae9 - 728x90) -->
-    <div class="sticky-top-ad">
-        <center>
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '453e0996357cdadd43b9a289a5273ae9',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//twigentirelysailor.com/453e0996357cdadd43b9a289a5273ae9/invoke.js"></script>
-        </center>
+<div class="ad-top-container">
+    <div class="ad-placeholder ad-728x90">
+        <script>
+  atOptions = {
+    'key' : '453e0996357cdadd43b9a289a5273ae9',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://buffcasualwhine.com/453e0996357cdadd43b9a289a5273ae9/invoke.js"></script>
+
+    </div>
+</div>
+
+<div class="main-layout">
+
+    <div class="ad-placeholder ad-left-160x600">
+        <script>
+  atOptions = {
+    'key' : '501af5810078119c948021aacace01cd',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://buffcasualwhine.com/501af5810078119c948021aacace01cd/invoke.js"></script>
+
     </div>
 
-    <div class="wrapper">
+    <div class="security-card">
+      <div class="ad-placeholder ad-320x50">
+            <script>
+  atOptions = {
+    'key' : '9cbca9fc3fab1a4816a56e2fcd9cedb9',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://buffcasualwhine.com/9cbca9fc3fab1a4816a56e2fcd9cedb9/invoke.js"></script>
 
-        <!-- SLOT 2: PRE-BIO TOP BANNER (Key: 9cbca9fc3fab1a4816a56e2fcd9cedb9 - 320x50) -->
-        <div class="ad-container">
-            <span class="ad-label">¡Accede ahora!</span>
-            <center>
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '9cbca9fc3fab1a4816a56e2fcd9cedb9',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//twigentirelysailor.com/9cbca9fc3fab1a4816a56e2fcd9cedb9/invoke.js"></script>
-            </center>
-        </div>
-
-        <!-- PROFILE / BRAND SECTION -->
-        <div class="profile-header">
-            <div class="avatar-box">
-                <div class="avatar-img">
-                    <div class="logo-icon">⏯️</div>
-                    <div class="logo-text-top">Master24HD</div>
-                </div>
-            </div>
-            <div class="badge-verified">¡Accede ahora!</div>
-            <h1 class="profile-title">Ver Películas y Series Gratis</h1>
-            <p class="profile-sub">Mira películas y series gratis en línea en HD en cualquier dispositivo. Master24HD ofrece películas en streaming de diversos géneros como Acción, Terror, Ciencia Ficción, Crimen y Comedia. Fácilmente accesible en todos los dispositivos, incluidos teléfonos inteligentes, tabletas, portátiles y ordenadores de sobremesa. Ver ahora.</p>
-        </div>
-
-        <!-- SLOT 3: MID-BIO BRIDGE BANNER (Key: 9cbca9fc3fab1a4816a56e2fcd9cedb9 - 320x50) -->
-        <div class="ad-container">
-            <span class="ad-label">¡Accede ahora!</span>
-            <center>
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '9cbca9fc3fab1a4816a56e2fcd9cedb9',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//twigentirelysailor.com/9cbca9fc3fab1a4816a56e2fcd9cedb9/invoke.js"></script>
-            </center>
         </div>
         
         <div class="movie-icon">🎬</div>
         
-        <h2>Confirmación de identidad para ver el video</h2>
+        <h2>ยืนยันตัวตนเพื่อรับชมวิดีโอ</h2>
         <p class="subtext" id="statusText">
-            Por favor, confirma que no eres un programa automático para desbloquear el servidor de streaming y continuar viendo la película o serie.
+            กรุณายืนยันว่าคุณไม่ใช่โปรแกรมอัตโนมัติ เพื่อปลดล็อกเซิร์ฟเวอร์สตรีมมิ่งและรับชมภาพยนตร์หรือซีรีส์ต่อ
         </p>
         
         <div class="countdown-container" id="countdownContainer">
-            Conectando con el servidor... El video estará disponible en <span id="timer">15</span> วินาที
+            กำลังเชื่อมต่อเซิร์ฟเวอร์... วิดีโอจะพร้อมใช้งานในอีก <span id="timer">15</span> วินาที
         </div>
         
         <div class="captcha-box" id="captchaBox">
             <div class="checkbox" id="checkbox"></div>
-            <span id="questionText">No soy un robot (reproducir video)</span>
-        </div>
-        </a>
-
-        <!-- SLOT 6: EXIT INTENT BOTTOM BANNER (Key: b1459668f954a85fab060a214b597df2 - 160x300) -->
-        <div class="ad-container">
-            <span class="ad-label">¡Accede ahora!</span>
-            <center>
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'b1459668f954a85fab060a214b597df2',
-                    'format' : 'iframe',
-                    'height' : 300,
-                    'width' : 160,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//twigentirelysailor.com/b1459668f954a85fab060a214b597df2/invoke.js"></script>
-            </center>
+            <span id="questionText">ฉันไม่ใช่หุ่นยนต์ (เล่นวิดีโอ)</span>
         </div>
 
-        <footer>
-            &copy; 2026 MASTER24HD
-            
-            <!-- Histats Tracking Code -->
-            <script type="text/javascript">
-                var _Hasync= _Hasync|| [];
-                _Hasync.push(['Histats.start', '1,5011181,4,0,0,0,00010000']);
-                _Hasync.push(['Histats.fasi', '1']);
-                _Hasync.push(['Histats.track_hits', '']);
-                (function() {
-                    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-                    hs.src = ('//s10.histats.com/js15_as.js');
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-                })();
-            </script>
-            <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5011181&101" alt="" border="0"></a></noscript>
-        </footer>
+        <div class="ad-placeholder ad-300x250">
+            <script>
+  atOptions = {
+    'key' : '40ecfb714f1985e7398bb0e2a12dc5c3',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://buffcasualwhine.com/40ecfb714f1985e7398bb0e2a12dc5c3/invoke.js"></script>
 
-    </div>
-
-    <!-- SLOT 7: STICKY BOTTOM BANNER (Key: e12c3573cb4e0def1b3a1938aa8f0654 - 468x60) -->
-    <div class="sticky-bottom-ad">
-        <center>
-        <script type="text/javascript">
-            atOptions = {
-                'key' : 'e12c3573cb4e0def1b3a1938aa8f0654',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//twigentirelysailor.com/e12c3573cb4e0def1b3a1938aa8f0654/invoke.js"></script>
-        </center>
-    </div>
-
-    <!-- SCRIPT AUTO-REDIRECT DIRECT -->
-    <script>
-    function startTimer(element, targetUrl) {
-        if (element.getAttribute('data-running') === 'true') {
-            return;
-        }
-
-        element.setAttribute('data-running', 'true');
-        let textSpan = element.querySelector('.btn-text');
+        </div>
         
-        if (!element.getAttribute('data-original-text')) {
-            element.setAttribute('data-original-text', textSpan.innerText);
+        <div class="footer-text">
+            ระบบสตรีมมิ่งเข้ารหัสปลอดภัย • รองรับความละเอียด Full HD • เซิร์ฟเวอร์ความเร็วสูง
+        </div>
+    </div>
+
+    <div class="ad-placeholder ad-right-160x300">
+        <script>
+  atOptions = {
+    'key' : 'b1459668f954a85fab060a214b597df2',
+    'format' : 'iframe',
+    'height' : 300,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://buffcasualwhine.com/b1459668f954a85fab060a214b597df2/invoke.js"></script>
+
+    </div>
+
+</div>
+
+<div class="ad-placeholder ad-468x60">
+    <script>
+  atOptions = {
+    'key' : 'e12c3573cb4e0def1b3a1938aa8f0654',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+</script>
+<script src="https://buffcasualwhine.com/e12c3573cb4e0def1b3a1938aa8f0654/invoke.js"></script>
+
+</div>
+
+<script>
+document.getElementById('captchaBox').addEventListener('click', function() {
+    var checkbox = document.getElementById('checkbox');
+    var captchaBox = document.getElementById('captchaBox');
+    var countdownContainer = document.getElementById('countdownContainer');
+    var statusText = document.getElementById('statusText');
+    
+    if (checkbox.classList.contains('checked')) return;
+    
+    checkbox.classList.add('checked');
+    
+    captchaBox.style.pointerEvents = 'none';
+    captchaBox.style.opacity = '0.6';
+    
+    statusText.innerText = "ยืนยันตัวตนสำเร็จ! กำลังเตรียมเครื่องเล่นวิดีโอของคุณ...";
+    
+    countdownContainer.style.display = 'block';
+    
+    var timeLeft = 15;
+    var timerElement = document.getElementById('timer');
+    
+    var countdownInterval = setInterval(function() {
+        timeLeft--;
+        timerElement.textContent = timeLeft;
+        
+        if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            window.location.href = "https://master24hd.site/th";
         }
+    }, 1000);
+});
+</script>
 
-        let timeLeft = 7;
-        element.style.background = 'linear-gradient(135deg, #d35400, #e67e22)';
-        element.style.boxShadow = '0 4px 15px rgba(211, 84, 0, 0.5)';
-        textSpan.innerText = 'Preparando el servidor... (' + timeLeft + ' วิ)';
-
-        let countdown = setInterval(function() {
-            timeLeft--;
-            textSpan.innerText = 'Preparando el servidor... (' + timeLeft + ' วิ)';
-
-            if (timeLeft <= 0) {
-                clearInterval(countdown);
-                textSpan.innerText = 'Ver Películas y Series Gratis...';
-                element.style.background = 'linear-gradient(135deg, #00c853, #009624)';
-                
-                window.location.href = targetUrl;
-            }
-        }, 1000);
-    }
-
-    window.addEventListener('pageshow', function(event) {
-        let buttons = document.querySelectorAll('.btn-link');
-        buttons.forEach(function(btn) {
-            btn.removeAttribute('data-running');
-            let textSpan = btn.querySelector('.btn-text');
-            let originalText = btn.getAttribute('data-original-text');
-            
-            if (originalText) {
-                textSpan.innerText = originalText;
-            }
-
-            if (btn.classList.contains('btn-primary')) {
-                btn.style.background = 'linear-gradient(135deg, #e50914, #b20710)';
-                btn.style.boxShadow = '0 4px 20px rgba(229, 9, 20, 0.4)';
-            } else {
-                btn.style.background = 'linear-gradient(135deg, rgba(25, 25, 30, 0.9), rgba(15, 15, 18, 0.9))';
-                btn.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
-            }
-        });
-    });
-    </script>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,5011181,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5011181&101" alt="counter free hit unique web" border="0"></a></noscript>
+<!-- Histats.com  END  -->
 
 </body>
 </html>
